@@ -101,7 +101,7 @@ void
 DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
-  std::cout << "\nEVT" << std::endl;
+  //  std::cout << "\nEVT" << std::endl;
    using namespace edm;
    passNominalTrig=0;
    passMonitoringTrig=0;
@@ -113,17 +113,17 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
    for (size_t i = 0; i < trgNames.size(); ++i) {
      const std::string &name = trgNames.triggerName(i);
      if ( (name.find("DST_DoubleMu3_noVtx_CaloScouting") != std::string::npos )) {
-       std::cout << "trgName=" << name << std::endl;
+       //std::cout << "trgName=" << name << std::endl;
        passNominalTrig=1;
      }
      if ( (name.find("DST_DoubleMu3_noVtx_CaloScouting_Monitoring") != std::string::npos )) {
-       std::cout << "trgName=" << name << std::endl;
+       //std::cout << "trgName=" << name << std::endl;
        passMonitoringTrig=1;
      }
      
    }
    
-   std::cout << passNominalTrig << " " << passMonitoringTrig << std::endl;
+   //   std::cout << passNominalTrig << " " << passMonitoringTrig << std::endl;
    
    
    edm::Handle<ScoutingMuonCollection> muonHandle;
@@ -142,7 +142,7 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
 	   TLorentzVector diMuon=mu1+mu2;
 	   if (diMuon.M()>mass)   mass=diMuon.M();
 	   
-	   std::cout << "dimuon mass = " << mass << std::endl;
+	   //	   std::cout << "dimuon mass = " << mass << std::endl;
 	 }
        }
      }
