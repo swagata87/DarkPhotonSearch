@@ -54,8 +54,8 @@ class DimuonScoutingAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResou
   edm::EDGetTokenT<ScoutingMuonCollection>         muonLabel_;
   edm::Service<TFileService> fs;
 
-  bool passNominalTrig;
-  bool passMonitoringTrig;
+  int passNominalTrig;
+  int passMonitoringTrig;
   double mass;
 
   TH1F *h1_dimuonMass_nominal_monitoring;
@@ -64,17 +64,7 @@ class DimuonScoutingAnalyzer : public edm::one::EDAnalyzer<edm::one::SharedResou
 
 };
 
-//
-// constants, enums and typedefs
-//
 
-//
-// static data member definitions
-//
-
-//
-// constructors and destructor
-//
 DimuonScoutingAnalyzer::DimuonScoutingAnalyzer(const edm::ParameterSet& iConfig)
 
 {
@@ -84,9 +74,9 @@ DimuonScoutingAnalyzer::DimuonScoutingAnalyzer(const edm::ParameterSet& iConfig)
 
   TFileDirectory histoDir = fs->mkdir("histoDir");
 
-  h1_dimuonMass_nominal_monitoring = histoDir.make<TH1F>("dimuMass_nominal_monitoring", "Mmumu_nominal_monitoring", 400, 0, 400);
-  h1_dimuonMass_nominal            = histoDir.make<TH1F>("dimuMass_nominal", "Mmumu_nominal", 400, 0, 400);
-  h1_dimuonMass_monitoring         = histoDir.make<TH1F>("dimuMass_monitoring", "Mmumu_monitoring", 400, 0, 400);
+  h1_dimuonMass_nominal_monitoring = histoDir.make<TH1F>("dimuMass_nominal_monitoring", "Mmumu_nominal_monitoring", 4000, 0, 400);
+  h1_dimuonMass_nominal            = histoDir.make<TH1F>("dimuMass_nominal", "Mmumu_nominal", 4000, 0, 400);
+  h1_dimuonMass_monitoring         = histoDir.make<TH1F>("dimuMass_monitoring", "Mmumu_monitoring", 4000, 0, 400);
   
 }
 
@@ -101,29 +91,29 @@ void
 DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
 
-  //  std::cout << "\nEVT" << std::endl;
+  std::cout << "\nEVT" << std::endl;
    using namespace edm;
-   passNominalTrig=0;
-   passMonitoringTrig=0;
+   passNominalTrig=99;
+   passMonitoringTrig=99;
    mass=0.0;
    edm::Handle<edm::TriggerResults> trgResultsHandle;
    iEvent.getByToken(trgResultsLabel_, trgResultsHandle);
    
    const edm::TriggerNames &trgNames = iEvent.triggerNames(*trgResultsHandle);
+
    for (size_t i = 0; i < trgNames.size(); ++i) {
      const std::string &name = trgNames.triggerName(i);
+   
      if ( (name.find("DST_DoubleMu3_noVtx_CaloScouting") != std::string::npos )) {
-       //std::cout << "trgName=" << name << std::endl;
-       passNominalTrig=1;
+       passNominalTrig=trgResultsHandle->accept(i);
      }
      if ( (name.find("DST_DoubleMu3_noVtx_CaloScouting_Monitoring") != std::string::npos )) {
-       //std::cout << "trgName=" << name << std::endl;
-       passMonitoringTrig=1;
+       passMonitoringTrig=trgResultsHandle->accept(i);
      }
      
    }
    
-   //   std::cout << passNominalTrig << " " << passMonitoringTrig << std::endl;
+   std::cout << passNominalTrig << " " << passMonitoringTrig << std::endl;
    
    
    edm::Handle<ScoutingMuonCollection> muonHandle;

@@ -28,7 +28,7 @@ process.TFileService = cms.Service("TFileService",
 )
 
 process.demo = cms.EDAnalyzer('DimuonScoutingAnalyzer',
-     triggerResults  = cms.InputTag("TriggerResults", "", "HLT"),
+     triggerResults  = cms.InputTag("TriggerResults", "", "TEST"),
      muons           = cms.InputTag("hltScoutingMuonPackerCalo", "", "TEST"),
 )
 
