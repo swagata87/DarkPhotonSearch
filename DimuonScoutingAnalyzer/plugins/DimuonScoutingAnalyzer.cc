@@ -188,7 +188,7 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
       
       if (iMu->pt()>3.0 && jMu->pt()>3.0 ) {
       	if ( fabs(iMu->eta())<2.1 && fabs(jMu->eta())<2.1  ) {
-	  if ( (iMu->charge())*(jMu->charge())>0 ) {
+	  if ( (iMu->charge())*(jMu->charge())<0 ) {
 	  //    if ( iMu->nTrackerLayersWithMeasurement()>5 && jMu->nTrackerLayersWithMeasurement()>5 ) {
       //      if ( iMu->nValidMuonHits()>0 && jMu->nValidMuonHits()>0 ) {
 	  
