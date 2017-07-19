@@ -16,7 +16,7 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 
 
 import FWCore.Utilities.FileUtils as FileUtils
-mylist = FileUtils.loadListFromFile ('in.txt') 
+mylist = FileUtils.loadListFromFile ('out.txt') 
 #mylist = FileUtils.loadListFromFile ('newfile_July15.txt') 
 readFiles = cms.untracked.vstring( *mylist)
 process.source = cms.Source('PoolSource', fileNames = readFiles)

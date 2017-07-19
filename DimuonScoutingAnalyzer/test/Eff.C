@@ -39,16 +39,12 @@ int Eff() {
   gStyle->SetTitleYSize(0.05);
   gStyle->SetTitleYOffset(1.05);
 
-  TH1F* den1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Den");
-  TH1F* num1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Num");
-  //  den1->Rebin(10);
-  // num1->Rebin(10);
-
-  TH1F* den1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Den");
-  TH1F* num1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Num");
-
-  TH1F* den1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Den");
-  TH1F* num1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Num");
+  TH1F* den1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Den_1050");
+  TH1F* num1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Num_1050");
+  TH1F* den1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Den_1050");
+  TH1F* num1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Num_1050");
+  TH1F* den1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Den_1050");
+  TH1F* num1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Num_1050");
 
   TGraphAsymmErrors* eff1 = new TGraphAsymmErrors(num1,den1,"cp");
   eff1->SetTitle("");
@@ -109,6 +105,12 @@ int Eff() {
   CMS_text_2->SetTextSize(0.05);
   CMS_text_2->SetTextAngle(0);
 
+  TLatex* CMS_text_3 = new TLatex(0.20,0.53,"w.r.t HLT_PFHT1050");
+  CMS_text_3->SetNDC();
+  CMS_text_3->SetTextFont(42);
+  CMS_text_3->SetTextSize(0.05);
+  CMS_text_3->SetTextAngle(0);
+
   TCanvas* canvas_eff1 = new TCanvas("eff1","eff1",800,600);
   canvas_eff1->cd();
   canvas_eff1->SetGrid();
@@ -116,6 +118,7 @@ int Eff() {
   eff1->Draw("Ap");
   CMS_text->Draw("same");
   CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
 
   TCanvas* canvas_eff2 = new TCanvas("eff2","eff2",800,600);
   canvas_eff2->cd();
@@ -124,6 +127,7 @@ int Eff() {
   eff2->Draw("Ap");
   CMS_text->Draw("same");
   CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
 
   TCanvas* canvas_eff3 = new TCanvas("eff3","eff3",800,600);
   canvas_eff3->cd();
@@ -132,6 +136,7 @@ int Eff() {
   eff3->Draw("Ap");
   CMS_text->Draw("same");
   CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
 
   TCanvas* canvas_eff4 = new TCanvas("eff4","eff4",800,600);
   canvas_eff4->cd();
@@ -140,18 +145,19 @@ int Eff() {
   eff4->Draw("Ap");
   CMS_text->Draw("same");
   CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
 
   canvas_eff1->Write();
-  canvas_eff1->Print("eff1.pdf");
+  canvas_eff1->Print("eff1_1050.pdf");
 
   canvas_eff2->Write();
-  canvas_eff2->Print("eff2.pdf");
+  canvas_eff2->Print("eff2_1050.pdf");
 
   canvas_eff3->Write();
-  canvas_eff3->Print("eff3.pdf");
+  canvas_eff3->Print("eff3_1050.pdf");
 
   canvas_eff4->Write();
-  canvas_eff4->Print("eff4.pdf");
+  canvas_eff4->Print("eff4_1050.pdf");
 
   return 0;
 

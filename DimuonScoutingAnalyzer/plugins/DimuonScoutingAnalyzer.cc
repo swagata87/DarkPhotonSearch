@@ -60,21 +60,46 @@ private:
   edm::Service<TFileService> fs;
   
   int passNominalTrig;
-  int passjetTrig;
+
+  int passjetTrig1050;
+  int passjetTrig430;
+  int passjetTrig680;
+  int passjetTrig890;
+
   int passMonitoringTrig;
   double mass;
   int nDisplacedVtx;
   int nPrimaryVtx;
   TLorentzVector sel_muon1, sel_muon2;
   
-  TH1F* h1_dimuonMass_Den;
-  TH1F* h1_dimuonMass_Num;
+  TH1F* h1_dimuonMass_Den_1050;
+  TH1F* h1_dimuonMass_Num_1050;
+  TH1F*  h1_muon1_pt_Num_1050;
+  TH1F*  h1_muon2_pt_Num_1050;
+  TH1F*  h1_muon1_pt_Den_1050;
+  TH1F*  h1_muon2_pt_Den_1050;
 
-  TH1F*  h1_muon1_pt_Num;
-  TH1F*  h1_muon2_pt_Num;
+  TH1F* h1_dimuonMass_Den_430;
+  TH1F* h1_dimuonMass_Num_430;
+  TH1F*  h1_muon1_pt_Num_430;
+  TH1F*  h1_muon2_pt_Num_430;
+  TH1F*  h1_muon1_pt_Den_430;
+  TH1F*  h1_muon2_pt_Den_430;
 
-  TH1F*  h1_muon1_pt_Den;
-  TH1F*  h1_muon2_pt_Den;
+  TH1F* h1_dimuonMass_Den_680;
+  TH1F* h1_dimuonMass_Num_680;
+  TH1F*  h1_muon1_pt_Num_680;
+  TH1F*  h1_muon2_pt_Num_680;
+  TH1F*  h1_muon1_pt_Den_680;
+  TH1F*  h1_muon2_pt_Den_680;
+
+  TH1F* h1_dimuonMass_Den_890;
+  TH1F* h1_dimuonMass_Num_890;
+  TH1F*  h1_muon1_pt_Num_890;
+  TH1F*  h1_muon2_pt_Num_890;
+  TH1F*  h1_muon1_pt_Den_890;
+  TH1F*  h1_muon2_pt_Den_890;
+
 
   TH1F* h1_dimuonMass;
   TH1I *h1_nPrimaryVtx;
@@ -102,14 +127,37 @@ DimuonScoutingAnalyzer::DimuonScoutingAnalyzer(const edm::ParameterSet& iConfig)
     
   h1_dimuonMass                = histoDir.make<TH1F>("dimuMass", "Mmumu", binnum, bins);
   
-  h1_dimuonMass_Den                = histoDir.make<TH1F>("dimuMass_Den", "Mmumu_Den", binnum, bins);
-  h1_dimuonMass_Num                = histoDir.make<TH1F>("dimuMass_Num", "Mmumu_Num", binnum, bins);
+  h1_dimuonMass_Den_1050                = histoDir.make<TH1F>("dimuMass_Den_1050", "Mmumu_Den_1050", binnum, bins);
+  h1_dimuonMass_Num_1050                = histoDir.make<TH1F>("dimuMass_Num_1050", "Mmumu_Num_1050", binnum, bins);
+  h1_muon1_pt_Den_1050                  = histoDir.make<TH1F>("mu1_pt_Den_1050",   "mu1_pt_Den_1050", binnum, bins);  
+  h1_muon2_pt_Den_1050                  = histoDir.make<TH1F>("mu2_pt_Den_1050",   "mu2_pt_Den_1050", binnum, bins);  
+  h1_muon1_pt_Num_1050                  = histoDir.make<TH1F>("mu1_pt_Num_1050",   "mu1_pt_Num_1050", binnum, bins);  
+  h1_muon2_pt_Num_1050                  = histoDir.make<TH1F>("mu2_pt_Num_1050",   "mu2_pt_Num_1050", binnum, bins);  
 
-  h1_muon1_pt_Den                  = histoDir.make<TH1F>("mu1_pt_Den",   "mu1_pt_Den", binnum, bins);  
-  h1_muon2_pt_Den                  = histoDir.make<TH1F>("mu2_pt_Den",   "mu2_pt_Den", binnum, bins);  
 
-  h1_muon1_pt_Num                  = histoDir.make<TH1F>("mu1_pt_Num",   "mu1_pt_Num", binnum, bins);  
-  h1_muon2_pt_Num                  = histoDir.make<TH1F>("mu2_pt_Num",   "mu2_pt_Num", binnum, bins);  
+  h1_dimuonMass_Den_430                = histoDir.make<TH1F>("dimuMass_Den_430", "Mmumu_Den_430", binnum, bins);
+  h1_dimuonMass_Num_430                = histoDir.make<TH1F>("dimuMass_Num_430", "Mmumu_Num_430", binnum, bins);
+  h1_muon1_pt_Den_430                  = histoDir.make<TH1F>("mu1_pt_Den_430",   "mu1_pt_Den_430", binnum, bins);  
+  h1_muon2_pt_Den_430                  = histoDir.make<TH1F>("mu2_pt_Den_430",   "mu2_pt_Den_430", binnum, bins);  
+  h1_muon1_pt_Num_430                  = histoDir.make<TH1F>("mu1_pt_Num_430",   "mu1_pt_Num_430", binnum, bins);  
+  h1_muon2_pt_Num_430                  = histoDir.make<TH1F>("mu2_pt_Num_430",   "mu2_pt_Num_430", binnum, bins);  
+
+
+  h1_dimuonMass_Den_680                = histoDir.make<TH1F>("dimuMass_Den_680", "Mmumu_Den_680", binnum, bins);
+  h1_dimuonMass_Num_680                = histoDir.make<TH1F>("dimuMass_Num_680", "Mmumu_Num_680", binnum, bins);
+  h1_muon1_pt_Den_680                  = histoDir.make<TH1F>("mu1_pt_Den_680",   "mu1_pt_Den_680", binnum, bins);  
+  h1_muon2_pt_Den_680                  = histoDir.make<TH1F>("mu2_pt_Den_680",   "mu2_pt_Den_680", binnum, bins);  
+  h1_muon1_pt_Num_680                  = histoDir.make<TH1F>("mu1_pt_Num_680",   "mu1_pt_Num_680", binnum, bins);  
+  h1_muon2_pt_Num_680                  = histoDir.make<TH1F>("mu2_pt_Num_680",   "mu2_pt_Num_680", binnum, bins);  
+
+
+  h1_dimuonMass_Den_890                = histoDir.make<TH1F>("dimuMass_Den_890", "Mmumu_Den_890", binnum, bins);
+  h1_dimuonMass_Num_890                = histoDir.make<TH1F>("dimuMass_Num_890", "Mmumu_Num_890", binnum, bins);
+  h1_muon1_pt_Den_890                  = histoDir.make<TH1F>("mu1_pt_Den_890",   "mu1_pt_Den_890", binnum, bins);  
+  h1_muon2_pt_Den_890                  = histoDir.make<TH1F>("mu2_pt_Den_890",   "mu2_pt_Den_890", binnum, bins);  
+  h1_muon1_pt_Num_890                  = histoDir.make<TH1F>("mu1_pt_Num_890",   "mu1_pt_Num_890", binnum, bins);  
+  h1_muon2_pt_Num_890                  = histoDir.make<TH1F>("mu2_pt_Num_890",   "mu2_pt_Num_890", binnum, bins);  
+
 
   h1_nPrimaryVtx                   = histoDir.make<TH1I>("nPrimaryVtx", "numPrimaryVtx", 50, -0.5, 49.5);
   h1_nDisplacedVtx                 = histoDir.make<TH1I>("nDisplacedVtx", "numDisplacedVtx", 50, -0.5, 49.5);
@@ -131,7 +179,12 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
   
   //  std::cout << "\nEVT" << std::endl;
   using namespace edm;
-  passjetTrig=99;
+
+  passjetTrig1050=99;
+  passjetTrig430=99;
+  passjetTrig680=99;
+  passjetTrig890=99;
+
   passNominalTrig=99;
   //  passMonitoringTrig=99;
   mass=-99.0;
@@ -159,9 +212,23 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
     for (size_t i = 0; i < trgNames.size(); ++i) {
       const std::string &name = trgNames.triggerName(i);
       //std::cout << "Other trig = " << name << std::endl;
+
       if ( (name.find("HLT_PFHT1050") != std::string::npos )) {
-	passjetTrig=trgResultsHandle->accept(i);
+	passjetTrig1050=trgResultsHandle->accept(i);
       }
+
+      if ( (name.find("HLT_PFHT430") != std::string::npos )) {
+	passjetTrig430=trgResultsHandle->accept(i);
+      }
+
+      if ( (name.find("HLT_PFHT680") != std::string::npos )) {
+	passjetTrig1050=trgResultsHandle->accept(i);
+      }
+
+      if ( (name.find("HLT_PFHT680") != std::string::npos )) {
+	passjetTrig1050=trgResultsHandle->accept(i);
+      }
+
     }
     
     //    std::cout << " passjetTrig " << passjetTrig << std::endl;
@@ -174,7 +241,7 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
   for (ScoutingMuonCollection::const_iterator iMu = muonHandle->begin(); iMu != muonHandle->end(); ++iMu) {
     for (ScoutingMuonCollection::const_iterator jMu = iMu+1; jMu != muonHandle->end(); ++jMu) {
       
-      
+      /*      
       std::cout <<   "\n\nglobal    "   <<  iMu->isGlobalMuon()  <<   "/" << jMu->isGlobalMuon() << std::endl; 
       std::cout <<   "tracker  "  <<	iMu->isTrackerMuon() <<   "/" << jMu->isTrackerMuon() << std::endl;   
       std::cout <<   "chi2  "  <<  iMu->chi2() << "/"  << jMu->chi2() << std::endl;
@@ -185,7 +252,7 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
       std::cout <<   "nValidMuonHits  "  << iMu->nValidMuonHits() << "/"  << jMu->nValidMuonHits() << std::endl;
       std::cout <<   "nValidPixelHits " <<  iMu->nValidPixelHits() << "/" << jMu->nValidPixelHits() << std::endl;
       std::cout <<   "charge "   << iMu->charge() << "/" << jMu->charge() << std::endl;
-      
+      */
       if (iMu->pt()>3.0 && jMu->pt()>3.0 ) {
       	if ( fabs(iMu->eta())<2.1 && fabs(jMu->eta())<2.1  ) {
 	  if ( (iMu->charge())*(jMu->charge())<0 ) {
@@ -200,7 +267,7 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
 		
 		if (diMuon.M()>mass)   {
 		  mass=diMuon.M();
-		  std::cout << "mass=" << mass << std::endl;
+		  //std::cout << "mass=" << mass << std::endl;
 		  if (mu1.Pt() >= mu2.Pt()) {
 		    sel_muon1=mu1;
 		    sel_muon2=mu2;
@@ -220,8 +287,8 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
   }
   //  std::cout << "dimuon mass = " << mass << std::endl;
   
-  if (mass>0 && (!passNominalTrig)) std::cout << "*** **** PROBLEM **** ***" << " mass=" << mass  <<  " passNominalTrig=" << passNominalTrig 
-					    <<  " passjetTrig=" << passjetTrig << std::endl;
+  //  if (mass>0 && (!passNominalTrig)) std::cout << "*** **** PROBLEM **** ***" << " mass=" << mass  <<  " passNominalTrig=" << passNominalTrig 
+  //<<  " passjetTrig=" << passjetTrig << std::endl;
 
   edm::Handle<ScoutingVertexCollection> primaryVtxHandle;
   iEvent.getByToken(primaryVtxLabel_, primaryVtxHandle);
@@ -231,18 +298,54 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
   iEvent.getByToken(displacedVtxLabel_, displacedVtxHandle);
   if (displacedVtxHandle.isValid())  nDisplacedVtx=displacedVtxHandle->size() ;
 
-  if (mass>0 && passjetTrig) {
-    h1_dimuonMass_Den->Fill(mass);
-    h1_muon1_pt_Den->Fill(mass);
-    h1_muon2_pt_Den->Fill(mass);
+  if (mass>0 && (passjetTrig1050==1) ) {
+    h1_dimuonMass_Den_1050->Fill(mass);
+    h1_muon1_pt_Den_1050->Fill(mass);
+    h1_muon2_pt_Den_1050->Fill(mass);
   }
-  if (mass>0 && passjetTrig && passNominalTrig) {
-    h1_dimuonMass_Num->Fill(mass);
-    h1_muon1_pt_Num->Fill(mass);
-    h1_muon2_pt_Num->Fill(mass);
+  if (mass>0 && (passjetTrig1050==1) && (passNominalTrig==1)) {
+    h1_dimuonMass_Num_1050->Fill(mass);
+    h1_muon1_pt_Num_1050->Fill(mass);
+    h1_muon2_pt_Num_1050->Fill(mass);
  
   }
 
+  if (mass>0 && (passjetTrig430==1) ) {
+    h1_dimuonMass_Den_430->Fill(mass);
+    h1_muon1_pt_Den_430->Fill(mass);
+    h1_muon2_pt_Den_430->Fill(mass);
+  }
+  if (mass>0 && (passjetTrig430==1) && (passNominalTrig==1)) {
+    h1_dimuonMass_Num_430->Fill(mass);
+    h1_muon1_pt_Num_430->Fill(mass);
+    h1_muon2_pt_Num_430->Fill(mass);
+ 
+  }
+
+
+  if (mass>0 && (passjetTrig680==1) ) {
+    h1_dimuonMass_Den_680->Fill(mass);
+    h1_muon1_pt_Den_680->Fill(mass);
+    h1_muon2_pt_Den_680->Fill(mass);
+  }
+  if (mass>0 && (passjetTrig680==1) && (passNominalTrig==1)) {
+    h1_dimuonMass_Num_680->Fill(mass);
+    h1_muon1_pt_Num_680->Fill(mass);
+    h1_muon2_pt_Num_680->Fill(mass);
+ 
+  }
+
+  if (mass>0 && (passjetTrig890==1) ) {
+    h1_dimuonMass_Den_890->Fill(mass);
+    h1_muon1_pt_Den_890->Fill(mass);
+    h1_muon2_pt_Den_890->Fill(mass);
+  }
+  if (mass>0 && (passjetTrig890==1) && (passNominalTrig==1)) {
+    h1_dimuonMass_Num_890->Fill(mass);
+    h1_muon1_pt_Num_890->Fill(mass);
+    h1_muon2_pt_Num_890->Fill(mass);
+ 
+  }
 
 
   if (passNominalTrig) {
