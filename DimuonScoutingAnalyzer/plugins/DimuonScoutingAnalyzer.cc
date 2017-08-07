@@ -65,7 +65,7 @@ private:
   int passjetTrig430;
   int passjetTrig680;
   int passjetTrig890;
-
+  float asym;
   int passMonitoringTrig;
   double mass;
   int nDisplacedVtx;
@@ -106,7 +106,7 @@ private:
   TH1I *h1_nDisplacedVtx;
   TH1F *h1_mu1_pt;
   TH1F *h1_mu2_pt;
-  
+  TH1F *h1_asym ;  
 };
 
 
@@ -125,7 +125,6 @@ DimuonScoutingAnalyzer::DimuonScoutingAnalyzer(const edm::ParameterSet& iConfig)
   Float_t bins[] = {0.,0.01,0.05,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,30,40,50,60,70,80,90,100};
   Int_t  binnum = sizeof(bins)/sizeof(Float_t) - 1; // or just write the number
     
-  h1_dimuonMass                = histoDir.make<TH1F>("dimuMass", "Mmumu", binnum, bins);
   
   h1_dimuonMass_Den_1050                = histoDir.make<TH1F>("dimuMass_Den_1050", "Mmumu_Den_1050", binnum, bins);
   h1_dimuonMass_Num_1050                = histoDir.make<TH1F>("dimuMass_Num_1050", "Mmumu_Num_1050", binnum, bins);
@@ -161,9 +160,13 @@ DimuonScoutingAnalyzer::DimuonScoutingAnalyzer(const edm::ParameterSet& iConfig)
 
   h1_nPrimaryVtx                   = histoDir.make<TH1I>("nPrimaryVtx", "numPrimaryVtx", 50, -0.5, 49.5);
   h1_nDisplacedVtx                 = histoDir.make<TH1I>("nDisplacedVtx", "numDisplacedVtx", 50, -0.5, 49.5);
-  h1_mu1_pt                        = histoDir.make<TH1F>("mu1_pt", "muon1_pt", 4000, 0, 400);
-  h1_mu2_pt                        = histoDir.make<TH1F>("mu2_pt", "muon2_pt", 4000, 0, 400);
-  
+  h1_dimuonMass                = histoDir.make<TH1F>("dimuMass", "Mmumu", 4000, 0, 200);
+  h1_mu1_pt                        = histoDir.make<TH1F>("mu1_pt", "muon1_pt", 4000, 0, 200);
+  h1_mu2_pt                        = histoDir.make<TH1F>("mu2_pt", "muon2_pt", 4000, 0, 200);
+  h1_asym                      = histoDir.make<TH1F>("asym",   "muPt_asym", 2000, -1.0, 1.0);
+
+
+
 }
 
 
@@ -275,6 +278,13 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
 		    sel_muon1=mu2;
 		    sel_muon2=mu1;
 		  }
+
+
+		  int rand1 = rand();
+		  // std::cout << "rand1=" << rand1 << " rand1%2=" << rand1%2 << std::endl;                        
+		  if ( (rand1%2)==0 )  asym = (sel_muon1.Pt()-sel_muon2.Pt())/(sel_muon1.Pt()+sel_muon2.Pt());
+		  else if ( (rand1%2)==1 )  asym = (sel_muon2.Pt()-sel_muon1.Pt())/(sel_muon1.Pt()+sel_muon2.Pt());
+
 		}      
 	      }
 	    }
@@ -348,12 +358,14 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
   }
 
 
-  if (passNominalTrig) {
+  if (passNominalTrig && (mass>0) ) {
     h1_dimuonMass->Fill(mass) ;
     h1_mu1_pt->Fill(sel_muon1.Pt());
     h1_mu2_pt->Fill(sel_muon2.Pt());
     h1_nPrimaryVtx->Fill(nPrimaryVtx);
     h1_nDisplacedVtx->Fill(nDisplacedVtx);
+    h1_asym->Fill(asym);                                                                                                                                            
+
   }  
   
 #ifdef THIS_IS_AN_EVENT_EXAMPLE
