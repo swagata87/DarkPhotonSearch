@@ -26,8 +26,8 @@
 
 int Eff_890() {
 
-
-  TFile *file_in  = new TFile("../python/AnalysisOutput.root");
+  TFile *file_in  = new TFile("../python/scouting_crab_projects_Aug7_DCSonlyJSON/crab_ScoutingCaloMuon_Run2017C/results/hist.root");
+  //  TFile *file_in  = new TFile("../python/AnalysisOutput.root");
   TFile* outputFile = new TFile("MyEff.root","RECREATE");
   outputFile->cd();
   gStyle->SetPadLeftMargin(0.15);

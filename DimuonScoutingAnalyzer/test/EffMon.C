@@ -24,72 +24,92 @@
 #include "TGraph.h"
 #include "TGraphAsymmErrors.h"
 
-int Eff() {
+int EffMon() {
 
   //AnalysisOutput.root
-    TFile *file_in  = new TFile("../python/scouting_crab_projects_Aug13_DCS_only_JSON/crab_ScoutingCaloMuon_Run2017C/results/hist.root");
-  //  TFile *file_in  = new TFile("../python/AnalysisOutput.root");
+  TFile *file_in  = new TFile("../python/scouting_crab_projects_Sept4/crab_ScoutingCaloMuon_Run2017D/results/hist.root");
+  //    TFile *file_in  = new TFile("../python/AnalysisOutput.root");
   TFile* outputFile = new TFile("MyEff.root","RECREATE");
   outputFile->cd();
   gStyle->SetPadLeftMargin(0.15);
-  gStyle->SetPadRightMargin(0.05);
+  gStyle->SetPadRightMargin(0.10);
   gStyle->SetPadBottomMargin(0.15);
   gStyle->SetPadTopMargin(0.05);
   gStyle->SetTitleXSize(0.05);
   gStyle->SetTitleXOffset(1.05);
   gStyle->SetTitleYSize(0.05);
   gStyle->SetTitleYOffset(1.05);
-  //dxy1_Den_1050
-  TH1F* den1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Den_1050");
-  TH1F* num1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Num_1050");
+  //dxy1_Den_Mon
+  TH1F* den1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Den_Mon_JPsi");
+  TH1F* num1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Num_Mon_JPsi");
 
-  TH1F* den2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Den_1050");
-  TH1F* num2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Num_1050");
+  TH1F* den2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Den_Mon_JPsi");
+  TH1F* num2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Num_Mon_JPsi");
   den2->Rebin(8);
   num2->Rebin(8);
 
-  TH1F* den3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Den_1050");
-  TH1F* num3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Num_1050");
+  TH1F* den3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Den_Mon_JPsi");
+  TH1F* num3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Num_Mon_JPsi");
   den3->Rebin(10);
   num3->Rebin(10);
 
-  TH1F* den4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Den_1050");
-  TH1F* num4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Num_1050");
+  TH1F* den4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Den_Mon_JPsi");
+  TH1F* num4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Num_Mon_JPsi");
   den4->Rebin(10);
   num4->Rebin(10);
 
-  TH1F* den5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Den_1050");
-  TH1F* num5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Num_1050");
+  TH1F* den5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Den_Mon_JPsi");
+  TH1F* num5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Num_Mon_JPsi");
   den5->Rebin(20);
   num5->Rebin(20);
 
-  TH1F* den6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Den_1050");
-  TH1F* num6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Num_1050");
+  TH1F* den6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Den_Mon_JPsi");
+  TH1F* num6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Num_Mon_JPsi");
   den6->Rebin(20);
   num6->Rebin(20);
 
-  TH1F* den1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Den_1050");
-  TH1F* num1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Num_1050");
-  TH1F* den1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Den_1050");
-  TH1F* num1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Num_1050");
+  TH1F* den7 = (TH1F*)file_in->Get("demo/histoDir/nPV_Den_Mon_JPsi");
+  TH1F* num7 = (TH1F*)file_in->Get("demo/histoDir/nPV_Num_Mon_JPsi");
 
-  TH1F* den_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Den_1050");
-  TH1F* num_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Num_1050");
-  TH1F* den_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Den_1050");
-  TH1F* num_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Num_1050");
+  TH1F* den8 = (TH1F*)file_in->Get("demo/histoDir/nDV_Den_Mon_JPsi");
+  TH1F* num8 = (TH1F*)file_in->Get("demo/histoDir/nDV_Num_Mon_JPsi");
+
+  //nPV_nDV_Num_Mon_JPsi
+
+  TH2F* den9 = (TH2F*)file_in->Get("demo/histoDir/nPV_nDV_Den_Mon_JPsi");
+  TH2F* num9 = (TH2F*)file_in->Get("demo/histoDir/nPV_nDV_Num_Mon_JPsi");
+
+  TH1F* den1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Den_Mon_JPsi");
+  TH1F* num1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Num_Mon_JPsi");
+  TH1F* den1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Den_Mon_JPsi");
+  TH1F* num1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Num_Mon_JPsi");
+
+  TH1F* den_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Den_Mon_JPsi");
+  TH1F* num_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Num_Mon_JPsi");
+  TH1F* den_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Den_Mon_JPsi");
+  TH1F* num_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Num_Mon_JPsi");
   den_eta1->Rebin(8);
   num_eta1->Rebin(8);
   den_eta2->Rebin(8);
   num_eta2->Rebin(8);
 
-  TH1F* den_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Den_1050");
-  TH1F* num_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Num_1050");
-  TH1F* den_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Den_1050");
-  TH1F* num_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Num_1050");
+  TH1F* den_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Den_Mon_JPsi");
+  TH1F* num_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Num_Mon_JPsi");
+  TH1F* den_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Den_Mon_JPsi");
+  TH1F* num_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Num_Mon_JPsi");
   den_phi1->Rebin(8);
   num_phi1->Rebin(8);
   den_phi2->Rebin(8);
   num_phi2->Rebin(8);
+
+  TH1F* den_chi2_by_ndof1 = (TH1F*)file_in->Get("demo/histoDir/muon1_chi2_by_ndof_Den_Mon_JPsi");
+  TH1F* num_chi2_by_ndof1 = (TH1F*)file_in->Get("demo/histoDir/muon1_chi2_by_ndof_Num_Mon_JPsi");
+  TH1F* den_chi2_by_ndof2 = (TH1F*)file_in->Get("demo/histoDir/muon2_chi2_by_ndof_Den_Mon_JPsi");
+  TH1F* num_chi2_by_ndof2 = (TH1F*)file_in->Get("demo/histoDir/muon2_chi2_by_ndof_Num_Mon_JPsi");
+  // den_chi2_by_ndof1->Rebin(1);
+  //  num_chi2_by_ndof1->Rebin(1);
+  // den_chi2_by_ndof2->Rebin(1);
+  // num_chi2_by_ndof2->Rebin(1);
 
   TGraphAsymmErrors* eff1 = new TGraphAsymmErrors(num1,den1,"cp");
   eff1->SetTitle("");
@@ -250,6 +270,55 @@ int Eff() {
   eff13->SetMinimum(0.0);
   eff13->SetMaximum(1.2);
 
+  TGraphAsymmErrors* eff14 = new TGraphAsymmErrors(num7,den7,"cp");
+  eff14->SetTitle("");
+  eff14->GetXaxis()->SetTitle("nPV ");
+  eff14->GetYaxis()->SetTitle("Trigger efficiency");
+  eff14->SetMarkerStyle(0);
+  eff14->SetMarkerColor(kBlue);
+  eff14->SetLineColor(kBlue);
+  eff14->SetLineWidth(2);
+  //  eff14->GetXaxis()->SetLimits(-0.4,0.4);
+  eff14->SetMinimum(0.0);
+  eff14->SetMaximum(1.2);
+
+  TGraphAsymmErrors* eff15 = new TGraphAsymmErrors(num8,den8,"cp");
+  eff15->SetTitle("");
+  eff15->GetXaxis()->SetTitle("nDisplacedVtx ");
+  eff15->GetYaxis()->SetTitle("Trigger efficiency");
+  eff15->SetMarkerStyle(0);
+  eff15->SetMarkerColor(kBlue);
+  eff15->SetLineColor(kBlue);
+  eff15->SetLineWidth(2);
+  //  eff15->GetXaxis()->SetLimits(-0.4,0.4);
+  eff15->SetMinimum(0.0);
+  eff15->SetMaximum(1.2);
+
+  TEfficiency* eff16 = new TEfficiency(*num9,*den9);
+  eff16->SetTitle(" ;nPrimaryVtx;nDisplacedVtx");
+  // eff16->SetTitle("");
+  // eff16->GetXaxis()->SetTitle("nPV ");
+  // eff16->GetYaxis()->SetTitle("nDV");
+  //  eff16->SetMarkerStyle(0);
+  //  eff16->SetMarkerColor(kBlue);
+  //  eff16->SetLineColor(kBlue);
+  //  eff16->SetLineWidth(2);
+  //  eff16->GetXaxis()->SetLimits(-0.4,0.4);
+  // eff16->SetMinimum(0.0);
+  // eff16->SetMaximum(1.2);
+
+  TGraphAsymmErrors* eff17 = new TGraphAsymmErrors(num_chi2_by_ndof1,den_chi2_by_ndof1,"cp");
+  eff17->SetTitle("");
+  eff17->GetXaxis()->SetTitle("chi2/NDOF of mu_1");
+  eff17->GetYaxis()->SetTitle("Trigger efficiency");
+  eff17->SetMarkerStyle(0);
+  eff17->SetMarkerColor(kBlue);
+  eff17->SetLineColor(kBlue);
+  eff17->SetLineWidth(2);
+  eff17->GetXaxis()->SetRangeUser(0,2);
+  eff17->SetMinimum(0.0);
+  eff17->SetMaximum(1.2);
+
   TLatex* CMS_text = new TLatex(0.20,0.88,"CMS");
   CMS_text->SetNDC();
   CMS_text->SetTextSize(0.04);
@@ -261,13 +330,13 @@ int Eff() {
   CMS_text_2->SetTextSize(0.04);
   CMS_text_2->SetTextAngle(0);
 
-  TLatex* CMS_text_3 = new TLatex(0.60,0.88,"w.r.t HLT_PFHT1050");
+  TLatex* CMS_text_3 = new TLatex(0.60,0.88,"w.r.t Monitoring trigger");
   CMS_text_3->SetNDC();
   CMS_text_3->SetTextFont(42);
   CMS_text_3->SetTextSize(0.03);
   CMS_text_3->SetTextAngle(0);
 
-  TLatex* era_text = new TLatex(0.60,0.84,"2017 C");
+  TLatex* era_text = new TLatex(0.60,0.84,"2017 D");
   era_text->SetNDC();
   era_text->SetTextSize(0.03);
   era_text->SetTextAngle(0);
@@ -420,44 +489,102 @@ int Eff() {
   era_text->Draw("same");
   lumi_text->Draw("same");
 
+  TCanvas* canvas_eff14 = new TCanvas("eff14","eff14",800,600);
+  canvas_eff14->cd();
+  canvas_eff14->SetGrid();
+  //canvas_eff2->SetLogx();
+  eff14->Draw("Ap");
+  CMS_text->Draw("same");
+  CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
+  era_text->Draw("same");
+  lumi_text->Draw("same");
+
+  TCanvas* canvas_eff15 = new TCanvas("eff15","eff15",800,600);
+  canvas_eff15->cd();
+  canvas_eff15->SetGrid();
+  //canvas_eff2->SetLogx();
+  eff15->Draw("Ap");
+  CMS_text->Draw("same");
+  CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
+  era_text->Draw("same");
+  lumi_text->Draw("same");
+
+  gStyle->SetPalette(kBird);
+
+  TCanvas* canvas_eff16 = new TCanvas("eff16","eff16",1000,600);
+  canvas_eff16->cd();
+  canvas_eff16->SetGrid();
+  //canvas_eff2->SetLogx();
+  eff16->Draw("COLZ");
+  CMS_text->Draw("same");
+  CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
+  era_text->Draw("same");
+  lumi_text->Draw("same");
+
+  TCanvas* canvas_eff17 = new TCanvas("eff17","eff17",1000,600);
+  canvas_eff17->cd();
+  canvas_eff17->SetGrid();
+  //canvas_eff2->SetLogx();
+  eff17->Draw("Ap");
+  CMS_text->Draw("same");
+  CMS_text_2->Draw("same");
+  CMS_text_3->Draw("same");
+  era_text->Draw("same");
+  lumi_text->Draw("same");
+
   canvas_eff1->Write();
-  canvas_eff1->Print("eff1_1050.pdf");
+  canvas_eff1->Print("eff1_Mon_JPsi.pdf");
 
   canvas_eff2->Write();
-  canvas_eff2->Print("eff2_1050.pdf");
+  canvas_eff2->Print("eff2_Mon_JPsi.pdf");
 
   canvas_eff3->Write();
-  canvas_eff3->Print("eff3_1050.pdf");
+  canvas_eff3->Print("eff3_Mon_JPsi.pdf");
 
   canvas_eff4->Write();
-  canvas_eff4->Print("eff4_1050.pdf");
+  canvas_eff4->Print("eff4_Mon_JPsi.pdf");
 
   canvas_eff5->Write();
-  canvas_eff5->Print("eff5_1050.pdf");
+  canvas_eff5->Print("eff5_Mon_JPsi.pdf");
 
   canvas_eff6->Write();
-  canvas_eff6->Print("eff6_1050.pdf");
+  canvas_eff6->Print("eff6_Mon_JPsi.pdf");
 
   canvas_eff7->Write();
-  canvas_eff7->Print("eff7_1050.pdf");
+  canvas_eff7->Print("eff7_Mon_JPsi.pdf");
 
   canvas_eff8->Write();
-  canvas_eff8->Print("eff8_1050.pdf");
+  canvas_eff8->Print("eff8_Mon_JPsi.pdf");
 
   canvas_eff9->Write();
-  canvas_eff9->Print("eff9_1050.pdf");
+  canvas_eff9->Print("eff9_Mon_JPsi.pdf");
 
   canvas_eff10->Write();
-  canvas_eff10->Print("eff10_1050.pdf");
+  canvas_eff10->Print("eff10_Mon_JPsi.pdf");
 
   canvas_eff11->Write();
-  canvas_eff11->Print("eff11_1050.pdf");
+  canvas_eff11->Print("eff11_Mon_JPsi.pdf");
 
   canvas_eff12->Write();
-  canvas_eff12->Print("eff12_1050.pdf");
+  canvas_eff12->Print("eff12_Mon_JPsi.pdf");
 
   canvas_eff13->Write();
-  canvas_eff13->Print("eff13_1050.pdf");
+  canvas_eff13->Print("eff13_Mon_JPsi.pdf");
+
+  canvas_eff14->Write();
+  canvas_eff14->Print("eff14_Mon_JPsi.pdf");
+
+  canvas_eff15->Write();
+  canvas_eff15->Print("eff15_Mon_JPsi.pdf");
+
+  canvas_eff16->Write();
+  canvas_eff16->Print("eff16_Mon_JPsi.pdf");
+
+  canvas_eff17->Write();
+  canvas_eff17->Print("eff17_Mon_JPsi.pdf");
 
   return 0;
 
