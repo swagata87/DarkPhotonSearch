@@ -11,13 +11,14 @@ config.JobType.outputFiles = ['AnalysisOutput.root']
 #config.JobType.inputFiles = ['MC_pileup.root','Data_pileup_normalized.root','Data_pileup_normalized_UP.root','Data_pileup_normalized_DOWN.root', 'k_faktors_ele.root', 'k_faktors_mu.root', 'k_faktors_tau.root','METFilters_cff.py', 'qcdFakeOutput15pt_eta.root']
 
 config.Data.inputDataset = ''
-config.Data.inputDBS = 'global'
+config.Data.inputDBS = 'phys03'
 config.Data.splitting = 'LumiBased'
-config.Data.lumiMask = 'json_DCSONLY.txt'
+config.Data.lumiMask = 'Cert_294927-302343_13TeV_PromptReco_Collisions17_JSON.txt' 
+#'json_DCSONLY.txt'
 #config.Data.lumiMask = 'Cert_294927-299649_13TeV_PromptReco_Collisions17_JSON_MuonPhys.txt'
-config.Data.outLFNDirBase = '/store/user/%s/scouting_Sept4/' % (getUsernameFromSiteDB())
+config.Data.outLFNDirBase = '/store/user/%s/scouting_Sept26_v3/' % (getUsernameFromSiteDB())
 config.Data.publication = False
-config.Data.outputDatasetTag = 'scouting_Sept4'
+config.Data.outputDatasetTag = 'scouting_Sept26_v3'
 config.Site.storageSite = 'T2_DE_RWTH'
 #config.Data.ignoreLocality = True
 #config.Site.whitelist = ['T2_DE_RWTH']
@@ -30,7 +31,7 @@ if __name__ == '__main__':
 
     # We want to put all the CRAB project directories from the tasks we submit here into one common directory.
     # That's why we need to set this parameter (here or above in the configuration file, it does not matter, we will not overwrite it).
-    config.General.workArea = 'scouting_crab_projects_Sept4'
+    config.General.workArea = 'scouting_crab_projects_Sept26_v3'
 
     def submit(config):
         try:
@@ -44,13 +45,13 @@ if __name__ == '__main__':
     ## From now on that's what users should modify: this is the a-la-CRAB2 configuration part. ##
     #############################################################################################
 
-    config.General.requestName = 'ScoutingCaloMuon_Run2017C'
-    config.Data.inputDataset = '/ScoutingCaloMuon/Run2017C-v1/RAW'
-    config.Data.unitsPerJob = 40
+    config.General.requestName = 'ScoutingCaloMuon_v2'
+    config.Data.inputDataset = '/JetHT/swmukher-Trig_Sep26_v2-ecfb1848a5b420bce1f4a1715644c223/USER'
+    config.Data.unitsPerJob = 250
     submit(config)
 
-    config.General.requestName = 'ScoutingCaloMuon_Run2017D'
-    config.Data.inputDataset = '/ScoutingCaloMuon/Run2017D-v1/RAW'
-    config.Data.unitsPerJob = 20
-    submit(config)
+#    config.General.requestName = 'ScoutingCaloMuon_Run2017D'
+#    config.Data.inputDataset = '/ScoutingCaloMuon/Run2017D-v1/RAW'
+#    config.Data.unitsPerJob = 20
+#    submit(config)
 

@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("Demo")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 5000
+process.MessageLogger.cerr.FwkReport.reportEvery = 5
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.load('PhysicsTools.PatAlgos.producersLayer1.patCandidates_cff')
 process.load('Configuration.EventContent.EventContent_cff')
@@ -20,7 +20,18 @@ process.GlobalTag = GlobalTag(process.GlobalTag, '92X_dataRun2_HLT_v7', '')
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
     fileNames = cms.untracked.vstring(
-        '/store/data/Run2017D/ScoutingCaloMuon/RAW/v1/000/302/031/00000/301F9B4E-648D-E711-8480-02163E012748.root'
+#        '/store/user/swmukher/crab_Trig_Sep25/HLTPhysics/Trig_Sep25/170925_213437/0000/outputScoutingCaloMuon_1.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_1.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_10.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_100.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_101.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_102.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_103.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_104.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_105.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_106.root',
+        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_107.root',
+#        '/store/data/Run2017D/ScoutingCaloMuon/RAW/v1/000/302/031/00000/301F9B4E-648D-E711-8480-02163E012748.root'
 #        '/store/data/Run2017C/ScoutingCaloMuon/RAW/v1/000/300/817/00000/8857569C-A37D-E711-8D2C-02163E019C2E.root'
 #        '/store/data/Run2017C/ScoutingCaloMuon/RAW/v1/000/300/817/00000/E858927C-A37D-E711-AB6C-02163E014734.root'
 #        '/store/data/Run2017C/ScoutingCaloMuon/RAW/v1/000/300/079/00000/5474DB72-1374-E711-B0E1-02163E01A582.root',
@@ -44,11 +55,11 @@ process.TFileService = cms.Service("TFileService",
 )
 
 process.demo = cms.EDAnalyzer('DimuonScoutingAnalyzer',
-#     triggerResultsScouting  = cms.InputTag("TriggerResults", "", "HLT"),
-     triggerResults          = cms.InputTag("TriggerResults", "", "HLT"),
-     muons                   = cms.InputTag("hltScoutingMuonPackerCalo", "", "HLT"),
-     primaryVtx              = cms.InputTag("hltScoutingPrimaryVertexPacker",   "primaryVtx",     "HLT"),
-     displacedVtx            = cms.InputTag("hltScoutingMuonPackerCalo",   "displacedVtx",   "HLT"),
+     triggerResultsScouting  = cms.InputTag("TriggerResults", "", "HLT"),
+     triggerResults          = cms.InputTag("TriggerResults", "", "TEST"),
+     muons                   = cms.InputTag("hltScoutingMuonPackerCalo", "", "TEST"),
+     primaryVtx              = cms.InputTag("hltScoutingPrimaryVertexPackerCaloMuon",   "primaryVtx",     "TEST"),
+     displacedVtx            = cms.InputTag("hltScoutingMuonPackerCalo",   "displacedVtx",   "TEST"),
      AlgInputTag             = cms.InputTag("gtStage2Digis"),
      l1tAlgBlkInputTag = cms.InputTag("gtStage2Digis"),
      l1tExtBlkInputTag = cms.InputTag("gtStage2Digis"),

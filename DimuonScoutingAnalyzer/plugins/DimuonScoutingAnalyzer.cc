@@ -53,7 +53,7 @@ private:
   virtual void endJob() override;
   
   // ----------member data ---------------------------
-  //  edm::EDGetTokenT<edm::TriggerResults>            trgResultsLabelScouting_;
+  edm::EDGetTokenT<edm::TriggerResults>            trgResultsLabelScouting_;
   edm::EDGetTokenT<edm::TriggerResults>            trgResultsLabel_;
   edm::EDGetTokenT<ScoutingMuonCollection>         muonLabel_;
   edm::EDGetTokenT<ScoutingVertexCollection>       primaryVtxLabel_;
@@ -207,7 +207,7 @@ private:
 DimuonScoutingAnalyzer::DimuonScoutingAnalyzer(const edm::ParameterSet& iConfig)
   
 {
-  //trgResultsLabelScouting_   = consumes<edm::TriggerResults>(iConfig.getParameter<edm::InputTag>("triggerResultsScouting"));
+  trgResultsLabelScouting_   = consumes<edm::TriggerResults>(iConfig.getParameter<edm::InputTag>("triggerResultsScouting"));
   trgResultsLabel_          = consumes<edm::TriggerResults>(iConfig.getParameter<edm::InputTag>("triggerResults"));
   muonLabel_                 = consumes<ScoutingMuonCollection>(iConfig.getParameter<edm::InputTag>("muons"));
   primaryVtxLabel_           = consumes<ScoutingVertexCollection>(iConfig.getParameter<edm::InputTag>("primaryVtx"));
@@ -402,13 +402,24 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
       if ( (name.find("DST_DoubleMu3_noVtx_CaloScouting_Monitoring_v") != std::string::npos )) {                                                                                       
 	passMonTrig=trgResultsHandle->accept(i);                                                                                                                   
       }     
+    }
+
+    edm::Handle<edm::TriggerResults> trgResultsHandleScouting;
+    iEvent.getByToken(trgResultsLabelScouting_, trgResultsHandleScouting);
+    const edm::TriggerNames &trgNames2 = iEvent.triggerNames(*trgResultsHandleScouting);
+    for (size_t i = 0; i < trgNames2.size(); ++i) {
+      const std::string &name = trgNames2.triggerName(i);
       
       if ( (name.find("HLT_PFHT1050_v") != std::string::npos )) {
-	passjetTrig1050=trgResultsHandle->accept(i);
+	passjetTrig1050=trgResultsHandleScouting->accept(i);
+       
       }
     }
+
     
-    //   std::cout << " passjetTrig " << passjetTrig1050 << std::endl;
+    //    if  (passjetTrig1050==1)    std::cout << " passjetTrig " << passjetTrig1050 << std::endl;
+    // std::cout << " passMonTrig " << passMonTrig << std::endl;
+    // std::cout << " passNominalTrig " << passNominalTrig << std::endl;
     /*
       l1GtUtils_->retrieveL1(iEvent,iSetup,algToken_);
       for( unsigned int iseed = 0; iseed < l1Seeds_.size(); iseed++ ) {
@@ -430,7 +441,7 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
     edm::Handle<ScoutingVertexCollection> displacedVtxHandle;
     iEvent.getByToken(displacedVtxLabel_, displacedVtxHandle);
     if (displacedVtxHandle.isValid())  nDisplacedVtx=displacedVtxHandle->size() ;
-
+    std::cout << "nDisp = " << nDisplacedVtx << std::endl;
   
   edm::Handle<ScoutingMuonCollection> muonHandle;
   iEvent.getByToken(muonLabel_, muonHandle);
@@ -513,9 +524,9 @@ DimuonScoutingAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
       h1_check->Fill(5);
     }
     
-    if (mass>0 && (passjetTrig1050)  && (!passNominalTrig) ) {
+    if (mass>0 && (passMonTrig)  && (!passNominalTrig) ) {
       std::cout << "*** **** PROBLEM **** ***" << " mass=" << mass  <<  " passNominalTrig=" << passNominalTrig 
-		<<  " passjetTrig=" << passjetTrig1050 << std::endl;
+		<<  " passjetTrig=" << passjetTrig1050 << " passMonTrig=" << passMonTrig << std::endl;
     }
 
 

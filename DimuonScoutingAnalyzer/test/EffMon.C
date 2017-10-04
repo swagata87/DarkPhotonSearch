@@ -27,7 +27,7 @@
 int EffMon() {
 
   //AnalysisOutput.root
-  TFile *file_in  = new TFile("../python/scouting_crab_projects_Sept4/crab_ScoutingCaloMuon_Run2017D/results/hist.root");
+  TFile *file_in  = new TFile("../python/scouting_crab_projects_Sept26_v2/crab_ScoutingCaloMuon_v2/results/hist.root");
   //    TFile *file_in  = new TFile("../python/AnalysisOutput.root");
   TFile* outputFile = new TFile("MyEff.root","RECREATE");
   outputFile->cd();
@@ -40,72 +40,72 @@ int EffMon() {
   gStyle->SetTitleYSize(0.05);
   gStyle->SetTitleYOffset(1.05);
   //dxy1_Den_Mon
-  TH1F* den1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Den_Mon_JPsi");
-  TH1F* num1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Num_Mon_JPsi");
+  TH1F* den1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Den_Mon");
+  TH1F* num1 = (TH1F*)file_in->Get("demo/histoDir/dimuMass_Num_Mon");
 
-  TH1F* den2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Den_Mon_JPsi");
-  TH1F* num2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Num_Mon_JPsi");
+  TH1F* den2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Den_Mon");
+  TH1F* num2 = (TH1F*)file_in->Get("demo/histoDir/dimudR_Num_Mon");
   den2->Rebin(8);
   num2->Rebin(8);
 
-  TH1F* den3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Den_Mon_JPsi");
-  TH1F* num3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Num_Mon_JPsi");
+  TH1F* den3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Den_Mon");
+  TH1F* num3 = (TH1F*)file_in->Get("demo/histoDir/dxy1_Num_Mon");
   den3->Rebin(10);
   num3->Rebin(10);
 
-  TH1F* den4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Den_Mon_JPsi");
-  TH1F* num4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Num_Mon_JPsi");
+  TH1F* den4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Den_Mon");
+  TH1F* num4 = (TH1F*)file_in->Get("demo/histoDir/dxy2_Num_Mon");
   den4->Rebin(10);
   num4->Rebin(10);
 
-  TH1F* den5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Den_Mon_JPsi");
-  TH1F* num5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Num_Mon_JPsi");
+  TH1F* den5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Den_Mon");
+  TH1F* num5 = (TH1F*)file_in->Get("demo/histoDir/dz1_Num_Mon");
   den5->Rebin(20);
   num5->Rebin(20);
 
-  TH1F* den6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Den_Mon_JPsi");
-  TH1F* num6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Num_Mon_JPsi");
+  TH1F* den6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Den_Mon");
+  TH1F* num6 = (TH1F*)file_in->Get("demo/histoDir/dz2_Num_Mon");
   den6->Rebin(20);
   num6->Rebin(20);
 
-  TH1F* den7 = (TH1F*)file_in->Get("demo/histoDir/nPV_Den_Mon_JPsi");
-  TH1F* num7 = (TH1F*)file_in->Get("demo/histoDir/nPV_Num_Mon_JPsi");
+  TH1F* den7 = (TH1F*)file_in->Get("demo/histoDir/nPV_Den_Mon");
+  TH1F* num7 = (TH1F*)file_in->Get("demo/histoDir/nPV_Num_Mon");
 
-  TH1F* den8 = (TH1F*)file_in->Get("demo/histoDir/nDV_Den_Mon_JPsi");
-  TH1F* num8 = (TH1F*)file_in->Get("demo/histoDir/nDV_Num_Mon_JPsi");
+  TH1F* den8 = (TH1F*)file_in->Get("demo/histoDir/nDV_Den_Mon");
+  TH1F* num8 = (TH1F*)file_in->Get("demo/histoDir/nDV_Num_Mon");
 
-  //nPV_nDV_Num_Mon_JPsi
+  //nPV_nDV_Num_Mon
 
-  TH2F* den9 = (TH2F*)file_in->Get("demo/histoDir/nPV_nDV_Den_Mon_JPsi");
-  TH2F* num9 = (TH2F*)file_in->Get("demo/histoDir/nPV_nDV_Num_Mon_JPsi");
+  TH2F* den9 = (TH2F*)file_in->Get("demo/histoDir/nPV_nDV_Den_Mon");
+  TH2F* num9 = (TH2F*)file_in->Get("demo/histoDir/nPV_nDV_Num_Mon");
 
-  TH1F* den1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Den_Mon_JPsi");
-  TH1F* num1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Num_Mon_JPsi");
-  TH1F* den1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Den_Mon_JPsi");
-  TH1F* num1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Num_Mon_JPsi");
+  TH1F* den1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Den_Mon");
+  TH1F* num1_pt1 = (TH1F*)file_in->Get("demo/histoDir/mu1_pt_Num_Mon");
+  TH1F* den1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Den_Mon");
+  TH1F* num1_pt2 = (TH1F*)file_in->Get("demo/histoDir/mu2_pt_Num_Mon");
 
-  TH1F* den_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Den_Mon_JPsi");
-  TH1F* num_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Num_Mon_JPsi");
-  TH1F* den_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Den_Mon_JPsi");
-  TH1F* num_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Num_Mon_JPsi");
+  TH1F* den_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Den_Mon");
+  TH1F* num_eta1 = (TH1F*)file_in->Get("demo/histoDir/mu1_eta_Num_Mon");
+  TH1F* den_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Den_Mon");
+  TH1F* num_eta2 = (TH1F*)file_in->Get("demo/histoDir/mu2_eta_Num_Mon");
   den_eta1->Rebin(8);
   num_eta1->Rebin(8);
   den_eta2->Rebin(8);
   num_eta2->Rebin(8);
 
-  TH1F* den_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Den_Mon_JPsi");
-  TH1F* num_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Num_Mon_JPsi");
-  TH1F* den_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Den_Mon_JPsi");
-  TH1F* num_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Num_Mon_JPsi");
+  TH1F* den_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Den_Mon");
+  TH1F* num_phi1 = (TH1F*)file_in->Get("demo/histoDir/mu1_phi_Num_Mon");
+  TH1F* den_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Den_Mon");
+  TH1F* num_phi2 = (TH1F*)file_in->Get("demo/histoDir/mu2_phi_Num_Mon");
   den_phi1->Rebin(8);
   num_phi1->Rebin(8);
   den_phi2->Rebin(8);
   num_phi2->Rebin(8);
 
-  TH1F* den_chi2_by_ndof1 = (TH1F*)file_in->Get("demo/histoDir/muon1_chi2_by_ndof_Den_Mon_JPsi");
-  TH1F* num_chi2_by_ndof1 = (TH1F*)file_in->Get("demo/histoDir/muon1_chi2_by_ndof_Num_Mon_JPsi");
-  TH1F* den_chi2_by_ndof2 = (TH1F*)file_in->Get("demo/histoDir/muon2_chi2_by_ndof_Den_Mon_JPsi");
-  TH1F* num_chi2_by_ndof2 = (TH1F*)file_in->Get("demo/histoDir/muon2_chi2_by_ndof_Num_Mon_JPsi");
+  TH1F* den_chi2_by_ndof1 = (TH1F*)file_in->Get("demo/histoDir/muon1_chi2_by_ndof_Den_Mon");
+  TH1F* num_chi2_by_ndof1 = (TH1F*)file_in->Get("demo/histoDir/muon1_chi2_by_ndof_Num_Mon");
+  TH1F* den_chi2_by_ndof2 = (TH1F*)file_in->Get("demo/histoDir/muon2_chi2_by_ndof_Den_Mon");
+  TH1F* num_chi2_by_ndof2 = (TH1F*)file_in->Get("demo/histoDir/muon2_chi2_by_ndof_Num_Mon");
   // den_chi2_by_ndof1->Rebin(1);
   //  num_chi2_by_ndof1->Rebin(1);
   // den_chi2_by_ndof2->Rebin(1);
@@ -341,7 +341,8 @@ int EffMon() {
   era_text->SetTextSize(0.03);
   era_text->SetTextAngle(0);
 
-  TLatex* lumi_text = new TLatex(0.70,0.84,"XX fb^{-1}");
+  //  TLatex* lumi_text = new TLatex(0.70,0.84,"XX fb^{-1}");
+  TLatex* lumi_text = new TLatex(0.70,0.84,"Golden JSON");
   lumi_text->SetNDC();
   lumi_text->SetTextSize(0.03);
   lumi_text->SetTextAngle(0);
@@ -536,55 +537,55 @@ int EffMon() {
   lumi_text->Draw("same");
 
   canvas_eff1->Write();
-  canvas_eff1->Print("eff1_Mon_JPsi.pdf");
+  canvas_eff1->Print("eff1_Mon.pdf");
 
   canvas_eff2->Write();
-  canvas_eff2->Print("eff2_Mon_JPsi.pdf");
+  canvas_eff2->Print("eff2_Mon.pdf");
 
   canvas_eff3->Write();
-  canvas_eff3->Print("eff3_Mon_JPsi.pdf");
+  canvas_eff3->Print("eff3_Mon.pdf");
 
   canvas_eff4->Write();
-  canvas_eff4->Print("eff4_Mon_JPsi.pdf");
+  canvas_eff4->Print("eff4_Mon.pdf");
 
   canvas_eff5->Write();
-  canvas_eff5->Print("eff5_Mon_JPsi.pdf");
+  canvas_eff5->Print("eff5_Mon.pdf");
 
   canvas_eff6->Write();
-  canvas_eff6->Print("eff6_Mon_JPsi.pdf");
+  canvas_eff6->Print("eff6_Mon.pdf");
 
   canvas_eff7->Write();
-  canvas_eff7->Print("eff7_Mon_JPsi.pdf");
+  canvas_eff7->Print("eff7_Mon.pdf");
 
   canvas_eff8->Write();
-  canvas_eff8->Print("eff8_Mon_JPsi.pdf");
+  canvas_eff8->Print("eff8_Mon.pdf");
 
   canvas_eff9->Write();
-  canvas_eff9->Print("eff9_Mon_JPsi.pdf");
+  canvas_eff9->Print("eff9_Mon.pdf");
 
   canvas_eff10->Write();
-  canvas_eff10->Print("eff10_Mon_JPsi.pdf");
+  canvas_eff10->Print("eff10_Mon.pdf");
 
   canvas_eff11->Write();
-  canvas_eff11->Print("eff11_Mon_JPsi.pdf");
+  canvas_eff11->Print("eff11_Mon.pdf");
 
   canvas_eff12->Write();
-  canvas_eff12->Print("eff12_Mon_JPsi.pdf");
+  canvas_eff12->Print("eff12_Mon.pdf");
 
   canvas_eff13->Write();
-  canvas_eff13->Print("eff13_Mon_JPsi.pdf");
+  canvas_eff13->Print("eff13_Mon.pdf");
 
   canvas_eff14->Write();
-  canvas_eff14->Print("eff14_Mon_JPsi.pdf");
+  canvas_eff14->Print("eff14_Mon.pdf");
 
   canvas_eff15->Write();
-  canvas_eff15->Print("eff15_Mon_JPsi.pdf");
+  canvas_eff15->Print("eff15_Mon.pdf");
 
   canvas_eff16->Write();
-  canvas_eff16->Print("eff16_Mon_JPsi.pdf");
+  canvas_eff16->Print("eff16_Mon.pdf");
 
   canvas_eff17->Write();
-  canvas_eff17->Print("eff17_Mon_JPsi.pdf");
+  canvas_eff17->Print("eff17_Mon.pdf");
 
   return 0;
 

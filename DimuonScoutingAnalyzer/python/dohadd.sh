@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd  scouting_crab_projects_Sept4/
+cd  scouting_crab_projects_Sept26_v3/
 echo $(pwd)
 #num=101
 #num2=0
