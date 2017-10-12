@@ -9,6 +9,7 @@
 <use name="DataFormats/HLTReco"/>
 <use name="DataFormats/Scouting"/>
 <use name="HLTrigger/Muon"/>
+<use name="DataFormats/VertexReco"/>
 
 <use name="PhysicsTools/UtilAlgos"/>
 <use name="HLTrigger/HLTcore"/>
