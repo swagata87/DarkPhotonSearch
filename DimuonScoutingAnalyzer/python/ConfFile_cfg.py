@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("Demo")
 
 process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 5
+process.MessageLogger.cerr.FwkReport.reportEvery = 1000
 process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
 process.load('PhysicsTools.PatAlgos.producersLayer1.patCandidates_cff')
 process.load('Configuration.EventContent.EventContent_cff')
@@ -14,13 +14,16 @@ process.gtStage2Digis.InputLabel = cms.InputTag( "hltFEDSelectorL1" )
 process.load("Configuration.StandardSequences.GeometryRecoDB_cff")
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, '92X_dataRun2_HLT_v7', '') 
+#process.GlobalTag = GlobalTag(process.GlobalTag, '92X_dataRun2_HLT_v7', '') 
+process.GlobalTag = GlobalTag(process.GlobalTag, '92X_dataRun2_Prompt_v9', '') 
 
 
 process.source = cms.Source("PoolSource",
     # replace 'myfile.root' with the source file you want to use
     fileNames = cms.untracked.vstring(
-        '/store/data/Run2017D/ParkingScoutingMonitor/MINIAOD/PromptReco-v1/000/302/031/00000/008A8AFA-458F-E711-91B9-02163E011CF7.root',
+        'file:ZEE_13TeV_TuneCUETP8M1_AODSIM.root'
+#        '/store/data/Run2017C/JetHT/MINIAOD/PromptReco-v3/000/300/742/00000/266BB971-8B7E-E711-A675-02163E01A5A5.root'
+#        '/store/data/Run2017D/ParkingScoutingMonitor/MINIAOD/PromptReco-v1/000/302/031/00000/008A8AFA-458F-E711-91B9-02163E011CF7.root',
 #        '/store/data/Run2017D/ParkingScoutingMonitor/MINIAOD/PromptReco-v1/000/302/031/00000/24AC007E-3D8F-E711-B81E-02163E019B45.root'
 #        '/store/user/swmukher/crab_Trig_Sep26_v2/HLTPhysics/Trig_Sep26_v2/170926_103547/0000/outputScoutingCaloMuon_100.root',
 #        '/store/data/Run2017D/ScoutingCaloMuon/RAW/v1/000/302/031/00000/301F9B4E-648D-E711-8480-02163E012748.root'
@@ -46,8 +49,9 @@ process.TFileService = cms.Service("TFileService",
 process.demo = cms.EDAnalyzer('DimuonScoutingAnalyzer',
     RunOnOfflineReco_        = cms.bool(True),
 #    RunOnOfflineReco_        = cms.bool(False),
-    triggerResultsScouting  = cms.InputTag("TriggerResults", "", "HLT"),
+#    triggerResultsScouting  = cms.InputTag("TriggerResults", "", "HLT"),
     triggerResults          = cms.InputTag("TriggerResults", "", "HLT"),
+    objectsScouting = cms.InputTag("slimmedPatTrigger"),
     muonsScouting           = cms.InputTag("hltScoutingMuonPackerCalo", "", "HLT"),
     muons                   = cms.InputTag("slimmedMuons"),
     primaryVtx              = cms.InputTag("offlineSlimmedPrimaryVertices"),
